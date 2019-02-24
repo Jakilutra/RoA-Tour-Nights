@@ -35,7 +35,6 @@ function InsertChronology() {
   sheet.getRange((lastRow+1)+":"+(lastRow+1)).activate();
   sheet.getRange("A"+(lastRow-20)+":"+"Q"+(lastRow-20)).copyTo(sheet.getRange("A"+(lastRow+1)+":"+"Q"+(lastRow+1)));
   
-  
   // Declaring variables for the loop.
   
   var i, clearRanges = [];
@@ -63,7 +62,16 @@ function InsertChronology() {
   
   n.setValue(nn);
   
- // Declaring and assigning: date cell object, time value and incremented date.
+  // Copying last week's next week's tiers.
+  
+  var lastnextweek = "";
+  lastnextweek = sheet.getRange("N"+(lastRow-20)+":"+"N"+(lastRow-20)).getValue();
+  if (lastnextweek.indexOf(",") === -1 && lastnextweek !== "TBA" && lastnextweek !== "TBD") {
+    lastnextweek = "RBY "+lastnextweek+", GSC "+lastnextweek+", ADV "+lastnextweek+", DPP "+lastnextweek+", BW "+lastnextweek+", ORAS "+lastnextweek;
+  } 
+  sheet.getRange("E"+(lastRow+1)+":"+"E"+(lastRow+1)).setValue(lastnextweek);
+  
+  // Declaring and assigning: date cell object, time value and incremented date.
   
   var d = {}, dd = {}, ddd = 0;
   d = sheet.getRange("Q"+(lastRow+1)+":"+"Q"+(lastRow+1));
