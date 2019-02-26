@@ -1,4 +1,5 @@
 Chronology Check
+
 =IFS(
 	COUNTA(A4:Q4)<17, "Warning: An incomplete set of headings detected.",
 	Cases!C4<>"No case mismatches detected.", Cases!C4,
