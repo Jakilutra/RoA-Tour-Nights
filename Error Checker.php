@@ -1,4 +1,4 @@
-// Chronology Check
+Chronology Check
 =IFS(
 	COUNTA(A4:Q4)<17, "Warning: An incomplete set of headings detected.",
 	Cases!C4<>"No case mismatches detected.", Cases!C4,
@@ -18,7 +18,7 @@
 	TRUE, "No chronology sheet errors detected."
 )
 
-// Cases Check
+Cases Check
 
 =IFS(
 	SUMPRODUCT(TRANSPOSE(SPLIT(B5,"(=/)")),{0;0;1;0;-1})<>0,"Warning: Multiple forms of Host — "&JOIN(", ",UNIQUE(ARRAYFORMULA(IFERROR(VLOOKUP(PROPER(FILTER(OFFSET(B$4,2,0):OFFSET(B$2014,-2,0),ARRAYFORMULA(COUNTIF(OFFSET(B$4,2,0):OFFSET(B$2014,-2,0),OFFSET(B$4,2,0):OFFSET(B$2014,-2,0))>1))),OFFSET(B$4,2,0):OFFSET(B$2014,-2,0),1,0),0))))&" detected. Please check upper/lower cases of characters.",
@@ -28,7 +28,7 @@
 	TRUE, "No case mismatches detected."
 )
 
-// Aliases Check
+Aliases Check
 
 =IFS(
 	SUMPRODUCT(TRANSPOSE(SPLIT(B5,"(=/)")),{0;0;1;0;-1})<>0, "Warning: A duplicate row in the aliases sheet is detected.",
