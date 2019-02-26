@@ -1,4 +1,4 @@
-/* Chronology Check
+// Chronology Check
 =IFS(
 	COUNTA(A4:Q4)<17, "Warning: An incomplete set of headings detected.",
 	Cases!C4<>"No case mismatches detected.", Cases!C4,
@@ -16,9 +16,9 @@
 	COUNTBLANK(OFFSET($P$3,2,0):OFFSET($P$614,-2,0))>0, "Warning: Missing post URL detected. Post required on the forums. See Step 15.",
 	""&COUNTA(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))<>IFERROR(REGEXEXTRACT(P4,"\d+"),COUNTA(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))), "Warning: Duplicate linked post",
 	TRUE, "No chronology sheet errors detected."
-)*/
+)
 
-/* Cases Check
+// Cases Check
 
 =IFS(
 	SUMPRODUCT(TRANSPOSE(SPLIT(B5,"(=/)")),{0;0;1;0;-1})<>0,"Warning: Multiple forms of Host — "&JOIN(", ",UNIQUE(ARRAYFORMULA(IFERROR(VLOOKUP(PROPER(FILTER(OFFSET(B$4,2,0):OFFSET(B$2014,-2,0),ARRAYFORMULA(COUNTIF(OFFSET(B$4,2,0):OFFSET(B$2014,-2,0),OFFSET(B$4,2,0):OFFSET(B$2014,-2,0))>1))),OFFSET(B$4,2,0):OFFSET(B$2014,-2,0),1,0),0))))&" detected. Please check upper/lower cases of characters.",
@@ -26,9 +26,9 @@
 	SUMPRODUCT(TRANSPOSE(SPLIT(D5,"(=/)")),{0;0;1;0;-1})<>0,"Warning: Multiple forms of Winner — "&JOIN(", ",UNIQUE(ARRAYFORMULA(IFERROR(VLOOKUP(PROPER(FILTER(OFFSET(D$4,2,0):OFFSET(D$2014,-2,0),ARRAYFORMULA(COUNTIF(OFFSET(D$4,2,0):OFFSET(D$2014,-2,0),OFFSET(D$4,2,0):OFFSET(D$2014,-2,0))>1))),OFFSET(D$4,2,0):OFFSET(D$2014,-2,0),1,0),0))))&" detected. Please check upper/lower cases of characters.",
 	OR(COUNTIF(OFFSET(D$4,2,0):OFFSET(D$2014,-2,0),"*((*"),COUNTIF(OFFSET(D$4,2,0):OFFSET(D$2014,-2,0),"*))*")), "Warning: Double brackets not paired up. Please correct.",
 	TRUE, "No case mismatches detected."
-)*/
+)
 
-/* Aliases Check
+// Aliases Check
 
 =IFS(
 	SUMPRODUCT(TRANSPOSE(SPLIT(B5,"(=/)")),{0;0;1;0;-1})<>0, "Warning: A duplicate row in the aliases sheet is detected.",
@@ -39,4 +39,4 @@
 	SUBSTITUTE(JOIN(", ",SPLIT(ARRAYFORMULA(CONCATENATE(IF(COUNTIF(OFFSET(Cases!$B$4,2,0):OFFSET(Cases!$B$2014,-2,0),SPLIT(SUBSTITUTE(OFFSET($C$4,2,0):OFFSET($C$94,-2,0),", ",","),",")),OFFSET($B$4,2,0):OFFSET($B$94,-2,0)&",",","))),",")),",","")<>"","Warning: Alias(es) of Host — "&JOIN(", ",SPLIT(ARRAYFORMULA(CONCATENATE(IF(COUNTIF(OFFSET(Cases!$B$4,2,0):OFFSET(Cases!$B$2014,-2,0),SPLIT(SUBSTITUTE(OFFSET($C$4,2,0):OFFSET($C$94,-2,0),", ",","),",")),OFFSET($B$4,2,0):OFFSET($B$94,-2,0)&",",","))),","))&" detected.",
 	SUBSTITUTE(JOIN(", ",SPLIT(ARRAYFORMULA(CONCATENATE(IF(COUNTIF(OFFSET(Cases!$B$4,2,0):OFFSET(Cases!$B$2014,-2,0),SPLIT(SUBSTITUTE(SUBSTITUTE(IF(OFFSET($D$4,2,0):OFFSET($D$94,-2,0)<>"",OFFSET($D$4,2,0):OFFSET($D$94,-2,0)&"*","~~~"&ROW(OFFSET($D$4,2,0):OFFSET($D$94,-2,0))),", ",","),",","*,"),",")),OFFSET($B$4,2,0):OFFSET($B$94,-2,0)&",",","))),",")),",","")<>"","Warning: Detected possible aliases of Host — "&JOIN(", ",SPLIT(ARRAYFORMULA(CONCATENATE(IF(COUNTIF(OFFSET(Cases!$B$4,2,0):OFFSET(Cases!$B$2014,-2,0),SPLIT(SUBSTITUTE(SUBSTITUTE(IF(OFFSET($D$4,2,0):OFFSET($D$94,-2,0)<>"",OFFSET($D$4,2,0):OFFSET($D$94,-2,0)&"*","~~~"&ROW(OFFSET($D$4,2,0):OFFSET($D$94,-2,0))),", ",","),",","*,"),","))),OFFSET($B$4,2,0):OFFSET($B$94,-2,0)&",",",")),","))&".",
 	TRUE,"No Aliases detected."
-)*/
+)
