@@ -5,8 +5,8 @@
 	Cases!C4<>"No case mismatches detected.", Cases!C4,
 	Aliases!C4<>"No Aliases detected.",Aliases!C4,
 	SUM(OFFSET($A3,2,0):OFFSET($A$614,-2,0)) <> ((MAX(OFFSET($A3,2,0):OFFSET($A$614,-2,0))^2+MAX(OFFSET($A3,2,0):OFFSET($A$614,-2,0)))/2), "A Tour Night # is incorrect.",
-	REGEXEXTRACT(F4,"\d+")<REGEXEXTRACT(E4,"\d+"), "Warning: Total number of winners is less than the expected number of tournaments (indicated by tiers). See Step 7.",
-	REGEXEXTRACT(F4,"\d+")>REGEXEXTRACT(E4,"\d+"), "Warning: Total number of winners is greater than the expected number of tournaments (indicated by tiers). See Step 6.",
+	REGEXEXTRACT(F4,"\d+")<REGEXEXTRACT(E4,"\d+"), "Warning: Total number of winners is less than the expected number of tournaments (indicated by tiers). See Step 8.",
+	REGEXEXTRACT(F4,"\d+")>REGEXEXTRACT(E4,"\d+"), "Warning: Total number of winners is greater than the expected number of tournaments (indicated by tiers). See Step 7.",
 	(COUNTBLANK(OFFSET($A$3,2,0):OFFSET($K$614,-2,0))+COUNTBLANK(OFFSET($N$3,2,0):OFFSET($N$614,-2,0))-166+COUNTBLANK(OFFSET($Q$3,2,0):OFFSET($Q$614,-2,0)))>0, "Warning: Missing cell content detected.",
 	IFERROR(VALUE(REGEXEXTRACT('Host Standings'!D5,"\d+"))<>(COUNTA(OFFSET($A$3,2,0):OFFSET(A$614,-2,0))+COUNTBLANK(OFFSET($A$3,2,0):OFFSET($A$614,-2,0))),TRUE)+IFERROR(REGEXEXTRACT('Host Standings'!C5,"\d+")<>REGEXEXTRACT(D4,"\d+"),TRUE)+IFERROR(REGEXEXTRACT('Host Standings'!E5,"\d+")<>REGEXEXTRACT(F4,"\d+"),TRUE)+IF(""&COUNTA('Host Standings'!C6:C)<>IFERROR(REGEXEXTRACT('Host Standings'!C5,"\d+"),COUNTA('Host Standings'!C6:C)),1,0), "Warning: Host Standings disparity! Please attempt updating the standings.",
 	IFERROR(REGEXEXTRACT('Tier Standings'!E4,"\d+")<>REGEXEXTRACT(E4,"\d+"),TRUE)+IF(""&COUNTA('Tier Standings'!B5:B)<>IFERROR(REGEXEXTRACT('Tier Standings'!B4,"\d+"),COUNTA('Tier Standings'!B5:B)),1,0), "Warning: Tier Standings disparity! Please attempt updating the standings.",
@@ -14,7 +14,7 @@
 	IFERROR(REGEXEXTRACT(Cases!E5,"\d+")<>REGEXEXTRACT(G4,"\d+"),TRUE)+IF(""&COUNTA(Cases!E6:E)<>IFERROR(REGEXEXTRACT(Cases!E5,"\d+"),COUNTA(Cases!E5)),1,0), "Warning: Replay disparity detected. Check every replay begins with https://",
 	ARRAYFORMULA(SUM(IFERROR(O5:O,1)))>0, "Warning: Probably a length disparity between Winners, Tiers and Replay Links arrays.",
 	IFERROR(VALUE(REGEXEXTRACT(P4,"\d+"))+COUNTBLANK(OFFSET($P$3,2,0):OFFSET($P$614,-2,0)),(COUNTIF(OFFSET($C$3,2,0):OFFSET($C$614,-2,0),CEILING(MAX(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))/3)*3)+COUNTIF(OFFSET($C$3,2,0):OFFSET($C$614,-2,0),(CEILING(MAX(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))/3)*3)-1)+COUNTIF(OFFSET($C$3,2,0):OFFSET($C$614,-2,0),(CEILING(MAX(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))/3)*3)-2)+((FLOOR((OFFSET($C$614,-2,0)-1)/3)*3)*7+18))) < (COUNTIF(OFFSET($C$3,2,0):OFFSET($C$614,-2,0),CEILING(MAX(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))/3)*3)+COUNTIF(OFFSET($C$3,2,0):OFFSET($C$614,-2,0),(CEILING(MAX(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))/3)*3)-1)+COUNTIF(OFFSET($C$3,2,0):OFFSET($C$614,-2,0),(CEILING(MAX(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))/3)*3)-2)+((FLOOR((OFFSET($C$614,-2,0)-1)/3)*3)*7+18)), "Warning: A row entry appears to be missing!",
-	COUNTBLANK(OFFSET($P$3,2,0):OFFSET($P$614,-2,0))>0, "Warning: Missing post URL detected. Post required on the forums. See Step 15.",
+	COUNTBLANK(OFFSET($P$3,2,0):OFFSET($P$614,-2,0))>0, "Warning: Missing post URL detected. Post required on the forums. See Step 18.",
 	""&COUNTA(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))<>IFERROR(REGEXEXTRACT(P4,"\d+"),COUNTA(OFFSET($C$3,2,0):OFFSET($C$614,-2,0))), "Warning: Duplicate linked post",
 	TRUE, "No chronology sheet errors detected."
 )
