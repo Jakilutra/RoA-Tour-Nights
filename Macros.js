@@ -65,7 +65,7 @@ function InsertChronology() {
   // Copying last week's next week's tiers.
   
   var lastnextweek = "";
-  lastnextweek = sheet.getRange("N"+(lastRow-20)+":"+"N"+(lastRow-20)).getValue();
+  lastnextweek = sheet.getRange("N"+(lastRow-20)+":"+"N"+(lastRow-20)).getValue().replace(/\u200B/g,"");
   if (lastnextweek.indexOf(",") === -1 && lastnextweek !== "TBA" && lastnextweek !== "TBD") {
     lastnextweek = "RBY "+lastnextweek+", GSC "+lastnextweek+", ADV "+lastnextweek+", DPP "+lastnextweek+", BW "+lastnextweek+", ORAS "+lastnextweek;
   } 
