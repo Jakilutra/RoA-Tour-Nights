@@ -12,5 +12,3 @@
 * Cases
 * Aliases
 * Changes
-
-Test
