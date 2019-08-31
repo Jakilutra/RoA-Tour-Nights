@@ -1,6 +1,6 @@
 # RoA Tour Nights
 
-[RoA Tour Nights] (https://www.smogon.com/forums/threads/roa-tour-nights.3615570/) are periods of live tournaments in the RoA Room on [Pokémon Showdown!](https://pokemonshowdown.com/)
+[RoA Tour Nights](https://www.smogon.com/forums/threads/roa-tour-nights.3615570/) are periods of live tournaments in the RoA Room on [Pokémon Showdown!](https://pokemonshowdown.com/)
 
 In this repository, you will find the spreadsheet and associated script files, which allow the tournament hosts to efficiently archive data and produce standings.
 
