@@ -1,6 +1,6 @@
 # RoA Tour Nights
 
-RoA Tour Nights are periods of live tournaments in the RoA Room on Pokémon Showdown! In this repository, you will find the spreadsheet and associated script files, which allow the tournament hosts to efficiently archive data and produce standings for the project.
+RoA Tour Nights are periods of live tournaments in the RoA Room on Pokémon Showdown! (https://pokemonshowdown.com/) In this repository, you will find the spreadsheet and associated script files, which allow the tournament hosts to efficiently archive data and produce standings for the project.
 
 ### The Spreadsheet contains the following 10 sheets:
 
