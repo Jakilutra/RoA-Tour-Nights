@@ -5,6 +5,9 @@ function onEdit(e) {
   var spreadsheet = {},
       sheet = {},
       cell = {},
+      colorRange = {},
+      pools = {},
+      poolTitles = {},
       cellValue = "",
       address = "";
   
@@ -16,18 +19,34 @@ function onEdit(e) {
   cellValue = cell.getValue();
   address = cell.getA1Notation();
   
-  // Show/Hide Extra Time Zone Columns
+  // Schedule sheet.
   
-  if (address === "A3" && sheet.getName() === "Schedule"){
-    if (cellValue === "Show Extra Time Zones"){
-      sheet.showColumns(7,2);
-      sheet.showColumns(10);
-      sheet.showColumns(12,3);
+  if (sheet.getName() === "Schedule"){
+    
+    // Show/Hide Extra Time Zone Columns
+    
+    if (address === "A3"){
+      if (cellValue === "Show Extra Time Zones"){
+        sheet.showColumns(7,2);
+        sheet.showColumns(10);
+        sheet.showColumns(12,3);
+      }
+      if (cellValue === "Hide Extra Time Zones"){
+        sheet.hideColumns(7,2);
+        sheet.hideColumns(10);
+        sheet.hideColumns(12,3);
+      }
     }
-    if (cellValue === "Hide Extra Time Zones"){
-      sheet.hideColumns(7,2);
-      sheet.hideColumns(10);
-      sheet.hideColumns(12,3);
+    
+    // Change color of pools background.
+    
+    if (address === "P4"){
+      colorRange = sheet.getRange("P4:Q4");
+      poolTitles = {h:"#ff4d6a",t:"#db8903",w:"#dfc90c"};
+      colorRange.setBackground(poolTitles[cellValue.substr(0,1).toLowerCase()]);
+      colorRange = sheet.getRange("P5:Q25");
+      pools = {h:"#ffbbcf",t:"#ffcd00",w:"#fffd49"};
+      colorRange.setBackground(pools[cellValue.substr(0,1).toLowerCase()]);
     }
   }
 }
