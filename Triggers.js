@@ -44,7 +44,7 @@ function onEdit(e) {
       colorRange = sheet.getRange("P4:Q4");
       poolTitles = {h:"#ff4d6a",t:"#db8903",w:"#dfc90c"};
       colorRange.setBackground(poolTitles[cellValue.substr(0,1).toLowerCase()]);
-      colorRange = sheet.getRange("P5:Q25");
+      colorRange = sheet.getRange("P5:Q27");
       pools = {h:"#ffbbcf",t:"#ffcd00",w:"#fffd49"};
       colorRange.setBackground(pools[cellValue.substr(0,1).toLowerCase()]);
     }
@@ -69,8 +69,8 @@ function dstCheck () {
   
   spreadsheet = SpreadsheetApp.openById("1ye_HTjC_jrExwMDPM2X1mtXhSDQOtjg841SzBno0ExU");
   sheet = spreadsheet.getSheetByName("Schedule");
-  acell = sheet.getRange(3,15);
-  ecell = sheet.getRange(3,6);
+  acell = sheet.getRange(3,6);
+  ecell = sheet.getRange(3,15);
   acellValue = acell.getValue();
   ecellValue = ecell.getValue();
   ad.setDate(ad.getDate() - 7);
@@ -78,17 +78,17 @@ function dstCheck () {
   
   // Daylight Saving Time Checks.
   
-  if (d.getDay() === 7) {
-    if ((ad.getMonth() > 2 && d.getMonth() < 11) && acellValue === "Off") {
+  if (d.getDay() === 0) {
+    if ((ad.getMonth() > 1 && d.getMonth() < 10) && acellValue === "Off") {
       acell.setValue("On");
     }
-    if ((ad.getMonth() < 3 || d.getMonth() > 10) && acellValue === "On") {
+    if ((ad.getMonth() < 2 || d.getMonth() > 9) && acellValue === "On") {
       acell.setValue("Off");
     }
-    if ((ed.getMonth() > 3 && ed.getMonth() < 11) && ecellValue === "Off") {
+    if ((ed.getMonth() > 2 && ed.getMonth() < 10) && ecellValue === "Off") {
       ecell.setValue("On");
     }
-    if ((ed.getMonth() < 4 || ed.getMonth() > 10) && ecellValue === "On") {
+    if ((ed.getMonth() < 3 || ed.getMonth() > 9) && ecellValue === "On") {
       ecell.setValue("Off");
     }
   }
