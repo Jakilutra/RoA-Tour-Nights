@@ -1,5 +1,5 @@
 function InsertChronology() {
-  
+
   // Declaring sheet variables.
   
   var spreadsheet = {},
@@ -33,7 +33,7 @@ function InsertChronology() {
   // Copying last week's row.
   
   sheet.getRange((lastRow+1)+":"+(lastRow+1)).activate();
-  sheet.getRange("A"+(lastRow-20)+":"+"Q"+(lastRow-20)).copyTo(sheet.getRange("A"+(lastRow+1)+":"+"Q"+(lastRow+1)));
+  sheet.getRange("A"+(lastRow-23)+":"+"Q"+(lastRow-23)).copyTo(sheet.getRange("A"+(lastRow+1)+":"+"Q"+(lastRow+1)));
   
   // Declaring variables for the loop.
   
@@ -65,9 +65,9 @@ function InsertChronology() {
   // Copying last week's next week's tiers.
   
   var lastnextweek = "";
-  lastnextweek = sheet.getRange("N"+(lastRow-20)+":"+"N"+(lastRow-20)).getValue().replace(/\u200B/g,"");
+  lastnextweek = sheet.getRange("N"+(lastRow-23)+":"+"N"+(lastRow-23)).getValue().replace(/\u200B/g,"");
   if (lastnextweek.indexOf(",") === -1 && lastnextweek !== "TBA" && lastnextweek !== "TBD") {
-    lastnextweek = "RBY "+lastnextweek+", GSC "+lastnextweek+", ADV "+lastnextweek+", DPP "+lastnextweek+", BW "+lastnextweek+", ORAS "+lastnextweek;
+    lastnextweek = "RBY "+lastnextweek+", GSC "+lastnextweek+", ADV "+lastnextweek+", DPP "+lastnextweek+", BW "+lastnextweek+", ORAS "+lastnextweek+", SM "+lastnextweek;
   } 
   sheet.getRange("E"+(lastRow+1)+":"+"E"+(lastRow+1)).setValue(lastnextweek);
   
@@ -96,13 +96,13 @@ function InsertChronology() {
   targetRange = sheet.getRange("E6:E").getValues();
   lastRow = targetRange.filter(String).length + 5;    
   maxRow = sheet.getMaxRows();
-  rowDif = lastRow + 7 - maxRow;
+  rowDif = lastRow + 8 - maxRow;
   
   // Expanding the cases sheet by the necessary number of rows.
   
   if (rowDif > 0) {
     sheet.insertRowsAfter(lastRow, rowDif);
-    sheet.getRange((lastRow)+":"+(lastRow)).autoFill(sheet.getRange("A"+(lastRow)+":"+"M"+(lastRow+rowDif)), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
+    sheet.getRange((lastRow)+":"+(lastRow)).autoFill(sheet.getRange("A"+(lastRow)+":"+"N"+(lastRow+rowDif)), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
   }
   
 };
@@ -252,8 +252,8 @@ function UpdateStandings() {
   while (nHosts.length > 0) {
     hostSheet.getRange(lastRow+":"+lastRow).activate();
     hostSheet.insertRowAfter(lastRow);
-    hostSheet.getRange("A"+(lastRow)+":"+"M"+(lastRow)).activate();
-    hostSheet.getActiveRange().autoFill(hostSheet.getRange("A"+(lastRow)+":"+"M"+(lastRow+1)), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
+    hostSheet.getRange("A"+(lastRow)+":"+"Q"+(lastRow)).activate();
+    hostSheet.getActiveRange().autoFill(hostSheet.getRange("A"+(lastRow)+":"+"Q"+(lastRow+1)), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
     hostSheet.getRange("C"+(lastRow+1)).activate();
     hostSheet.getCurrentCell().setValue(nHosts[0]);
     nHosts.shift();
@@ -281,8 +281,8 @@ function UpdateStandings() {
   while (nWinners.length > 0) {
     winnerSheet.getRange(lastRow+":"+lastRow).activate();
     winnerSheet.insertRowAfter(lastRow);
-    winnerSheet.getRange("A"+(lastRow)+":"+"L"+(lastRow)).activate();
-    winnerSheet.getActiveRange().autoFill(winnerSheet.getRange("A"+(lastRow)+":"+"L"+(lastRow+1)), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
+    winnerSheet.getRange("A"+(lastRow)+":"+"Q"+(lastRow)).activate();
+    winnerSheet.getActiveRange().autoFill(winnerSheet.getRange("A"+(lastRow)+":"+"Q"+(lastRow+1)), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
     winnerSheet.getRange("C"+(lastRow+1)).activate();
     winnerSheet.getCurrentCell().setValue(nWinners[0]);
     nWinners.shift();
@@ -296,9 +296,9 @@ function UpdateStandings() {
   // Sorting all tables.
   
   var sort = function (a,b,c,d) {
-    a.getRange("A6:M").activate().sort([{column: 2, ascending: true}, {column: 5, ascending: false}, {column: 3, ascending: true}]);
+    a.getRange("A6:Q").activate().sort([{column: 2, ascending: true}, {column: 7, ascending: false}, {column: 3, ascending: true}]);
     b.getRange("A5:G").activate().sort([{column: 2, ascending: true}, {column: 4, ascending: true}]);
-    c.getRange("A6:L").activate().sort([{column: 2, ascending: true}, {column: 3, ascending: true}]);
+    c.getRange("A6:Q").activate().sort([{column: 2, ascending: true}, {column: 3, ascending: true}]);
     d.getRange("A6:D").activate().sort([{column: 2, ascending: true}]);
   }
   sort(hostSheet, tierSheet, winnerSheet, aliasSheet);
@@ -312,9 +312,9 @@ function UpdateStandings() {
       t0 = 0, tc = 0,
       w0 = 0, wc = 0;
   
-  hostsN = hostSheet.getRange("D6:D").getValues();
+  hostsN = hostSheet.getRange("E6:E").getValues();
   tiersN = tierSheet.getRange("E6:E").getValues();
-  winnersN = winnerSheet.getRange("D6:D").getValues();
+  winnersN = winnerSheet.getRange("F6:F").getValues();
   hc = 6; tc = 6; wc = 6;
   
   // Removing all hosts, tiers and winners with 0 usage from their respective standings.
