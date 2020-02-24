@@ -33,7 +33,7 @@ function InsertChronology() {
   // Copying last week's row.
   
   sheet.getRange((lastRow+1)+":"+(lastRow+1)).activate();
-  sheet.getRange("A"+(lastRow-23)+":"+"S"+(lastRow-23)).copyTo(sheet.getRange("A"+(lastRow+1)+":"+"S"+(lastRow+1)));
+  sheet.getRange("A"+(lastRow-23)+":"+"U"+(lastRow-23)).copyTo(sheet.getRange("A"+(lastRow+1)+":"+"U"+(lastRow+1)));
   
   // Declaring variables for the loop.
   
@@ -41,9 +41,9 @@ function InsertChronology() {
   
   // Adding ranges of content to be cleared for the loop.
   
-  clearRanges = ["F"+(lastRow+1)+":"+"I"+(lastRow+1),
-                 "N"+(lastRow+1)+":"+"P"+(lastRow+1),
-                 "R"+(lastRow+1)+":"+"R"+(lastRow+1)];
+  clearRanges = ["H"+(lastRow+1)+":"+"K"+(lastRow+1),
+                 "P"+(lastRow+1)+":"+"R"+(lastRow+1),
+                 "T"+(lastRow+1)+":"+"T"+(lastRow+1)];
   
   // Clearing week specific content using the loop.
   
@@ -52,29 +52,33 @@ function InsertChronology() {
   }
   
   
-  // Declaring and assigning: night cell object and incremented edition #.
+  // Declaring and assigning: week and event cell objects and incremented week # and event #s.
   
-  var n = {}, nn = 0;
-  n = sheet.getRange("C"+(lastRow+1)+":"+"C"+(lastRow+1));
+  var w = {}, n = {},
+  wn = 0, nn = 0;
+  w = sheet.getRange("B"+(lastRow+1)+":"+"B"+(lastRow+1));
+  n = sheet.getRange("D"+(lastRow+1)+":"+"D"+(lastRow+1));
+  wn = w.getValue()+1;
   nn = n.getValue()+3;
   
-  // Setting night edition #
+  // Setting week and night event #
   
+  w.setValue(wn);
   n.setValue(nn);
   
   // Copying last week's next week's tiers.
   
   var lastnextweek = "";
-  lastnextweek = sheet.getRange("P"+(lastRow-23)+":"+"P"+(lastRow-23)).getValue().replace(/\u200B/g,"");
+  lastnextweek = sheet.getRange("R"+(lastRow-23)+":"+"R"+(lastRow-23)).getValue().replace(/\u200B/g,"");
   if (lastnextweek.indexOf(",") === -1 && lastnextweek !== "TBA" && lastnextweek !== "TBD") {
     lastnextweek = "RBY "+lastnextweek+", GSC "+lastnextweek+", ADV "+lastnextweek+", DPP "+lastnextweek+", BW "+lastnextweek+", ORAS "+lastnextweek+", SM "+lastnextweek;
   } 
-  sheet.getRange("F"+(lastRow+1)+":"+"F"+(lastRow+1)).setValue(lastnextweek);
+  sheet.getRange("H"+(lastRow+1)+":"+"H"+(lastRow+1)).setValue(lastnextweek);
   
   // Declaring and assigning: date cell object, time value and incremented date.
   
   var d = {}, dd = {}, ddd = 0;
-  d = sheet.getRange("S"+(lastRow+1)+":"+"S"+(lastRow+1));
+  d = sheet.getRange("U"+(lastRow+1)+":"+"U"+(lastRow+1));
   dd = new Date(d.getValue());
   ddd = dd.getTime() + 7*24*60*60*1000;
   dd = new Date(ddd);
@@ -339,6 +343,5 @@ function UpdateStandings() {
   }
   
   // Update Message.
-  
   spreadsheet.toast("All Standings have been updated!")
 };
