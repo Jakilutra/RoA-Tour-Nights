@@ -67,7 +67,7 @@ function dstCheck () {
   
   // Assigning sheet variables.
   
-  spreadsheet = SpreadsheetApp.openById("1ye_HTjC_jrExwMDPM2X1mtXhSDQOtjg841SzBno0ExU");
+  spreadsheet = SpreadsheetApp.openById("1VdHbQb6uJdDPLLR5jtemBfmyVJBotbFXmfZocgVdoK8");
   sheet = spreadsheet.getSheetByName("Schedule");
   acell = sheet.getRange(3,6);
   ecell = sheet.getRange(3,15);
