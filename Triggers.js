@@ -21,17 +21,17 @@ function onEdit(e) {
   
   // Schedule sheet.
   
-  if (sheet.getName() === "Schedule"){
+  if (sheet.getName() === "Schedule") {
     
     // Show/Hide Extra Time Zone Columns
     
-    if (address === "A3"){
-      if (cellValue === "Show Extra Time Zones"){
+    if (address === "A3") {
+      if (cellValue === "Show Extra Time Zones") {
         sheet.showColumns(7,2);
         sheet.showColumns(10);
         sheet.showColumns(12,3);
       }
-      if (cellValue === "Hide Extra Time Zones"){
+      if (cellValue === "Hide Extra Time Zones") {
         sheet.hideColumns(7,2);
         sheet.hideColumns(10);
         sheet.hideColumns(12,3);
@@ -49,6 +49,18 @@ function onEdit(e) {
       colorRange.setBackground(pools[cellValue.substr(0,1).toLowerCase()]);
     }
   }
+  
+  // Chronology Sheet.
+  
+  if (sheet.getName() === "Chronology") {
+    
+    // Correcting delimiters and removing excess spaces.
+    if (e.oldValue !== cellValue) {
+      if (address[0] === "H" || address[0] === "I" || address[0] === "J" || address[0] === "K" || address[0] === "R") {
+        cell.setValue(cellValue.replace(/\s{2,}/," ").replace(/,(\S)/,", $1").replace(/^\s([^,\s])/,"$1").replace(/([^,\s])\s,/,"$1,").replace(/([^,\s])\s$/,"$1"));
+      }
+    }
+  }  
 }
 
 function dstCheck () {
