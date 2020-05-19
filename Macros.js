@@ -16,7 +16,6 @@ function InsertChronology() {
   
   if (sheetName !== "Chronology") {
       throw new Error("You are on the " + sheetName + " Sheet! Go to the Chronology Sheet to use this macro!");
-      return;
   }
   
   
@@ -47,10 +46,9 @@ function InsertChronology() {
   
   // Clearing week specific content using the loop.
   
-  for (i in clearRanges) {
-    sheet.getRange(clearRanges[i]).clearContent();
+  for (i of clearRanges) {
+    sheet.getRange(i).clearContent();
   }
-  
   
   // Declaring and assigning: week and event cell objects and incremented week # and event #s.
   
@@ -109,7 +107,7 @@ function InsertChronology() {
     sheet.getRange((lastRow)+":"+(lastRow)).autoFill(sheet.getRange("A"+(lastRow)+":"+"R"+(lastRow+rowDif)), SpreadsheetApp.AutoFillSeries.DEFAULT_SERIES);
   }
   
-};
+}
 
 function InsertAliases() {
   
@@ -129,7 +127,6 @@ function InsertAliases() {
   
   if (sheetName !== "Aliases") {
       throw new Error("You are on the " + sheetName + " Sheet! Go to the Aliases Sheet to use this macro!");
-      return;
   }
   
   // Declaring and assigning another variable: lastRow = Last Filled Row #.
@@ -151,7 +148,7 @@ function InsertAliases() {
   // Clearing content.
   
   sheet.getRange("B"+(lastRow+1)+":"+"D"+(lastRow+1)).clearContent();
-};
+}
 
 function UpdateStandings() {
   
@@ -172,7 +169,11 @@ function UpdateStandings() {
       tiername = [],
       tiers = [],
       winners = [],
-      h, g, t, n, w,
+      h = 0,
+      g = 0,
+      t = 0,
+      n = 0,
+      w = 0,
       upper = function () {},
       uHosts = [],
       uTiers = [],
@@ -212,7 +213,7 @@ function UpdateStandings() {
   
   // Concatenating tier names with their generations.
   
-  for (g in gen){
+  for (g = 0; g < gen.length; g++) {
     tiers[g] = gen[g]+" "+tiername[g];
   }
   
@@ -223,7 +224,7 @@ function UpdateStandings() {
       function(value) {
         return value.toUpperCase();
       }
-    )
+    );
   };
   
   // Converting the host, tier and winner standings arrays to upper case.
@@ -235,17 +236,17 @@ function UpdateStandings() {
   // Comparing arrays of Hosts, Tiers, Winners and creating difference arrays.
   
   for (h in cHosts) {
-    if (uHosts.indexOf(cHosts[h].toUpperCase()) === -1){
+    if (uHosts.indexOf(cHosts[h].toUpperCase()) === -1) {
       nHosts.push(cHosts[h]);
     }
   }
   for (t in cTiers) {
-    if (uTiers.indexOf(cTiers[t].toUpperCase()) === -1){
+    if (uTiers.indexOf(cTiers[t].toUpperCase()) === -1) {
       nTiers.push(cTiers[t]);
     }
   }
   for (w in cWinners) {
-    if (uWinners.indexOf(cWinners[w].toUpperCase()) === -1){
+    if (uWinners.indexOf(cWinners[w].toUpperCase()) === -1) {
       nWinners.push(cWinners[w]);
     }
   }
@@ -264,7 +265,7 @@ function UpdateStandings() {
     lastRow++;
   }
   lastRow = tierSheet.getLastRow();
-  for (n in nTiers){
+  for (n = 0; n < nTiers.length; n++) {
     nTiers[n] = nTiers[n].split(" ");
   }
   while (nTiers.length > 0) {
@@ -304,7 +305,7 @@ function UpdateStandings() {
     b.getRange("A5:N").activate().sort([{column: 2, ascending: true}, {column: 4, ascending: true}]);
     c.getRange("A6:V").activate().sort([{column: 2, ascending: true}, {column: 3, ascending: true}]);
     d.getRange("A6:D").activate().sort([{column: 2, ascending: true}]);
-  }
+  };
   sort(hostSheet, tierSheet, winnerSheet, aliasSheet);
   
   // Setting up variables to find zeroes.
@@ -343,5 +344,5 @@ function UpdateStandings() {
   }
   
   // Update Message.
-  spreadsheet.toast("All Standings have been updated!")
-};
+  spreadsheet.toast("All Standings have been updated!");
+}
