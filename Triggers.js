@@ -57,7 +57,7 @@ function onEdit(e) {
     // Correcting delimiters and removing excess spaces.
     if (e.oldValue !== cellValue) {
       if (address[0] === "H" || address[0] === "I" || address[0] === "J" || address[0] === "K" || address[0] === "R") {
-        cell.setValue(cellValue.replace(/\s{2,}/," ").replace(/,(\S)/,", $1").replace(/^\s([^,\s])/,"$1").replace(/([^,\s])\s,/,"$1,").replace(/([^,\s])\s$/,"$1"));
+        cell.setValue(cellValue.replace(/(?:(?<=\s)\s+)|(?:(?<=^)\s(?!,|\s*$))|(?:(?<!^|[,\s])\s+(?=,|$))/g,"").replace(/(^,)|((?<=,)\S)/g," $&"));
       }
     }
   }  
