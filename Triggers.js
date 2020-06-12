@@ -55,9 +55,9 @@ function onEdit(e) {
   if (sheet.getName() === "Chronology") {
     
     // Correcting delimiters and removing excess spaces.
-    if (e.oldValue !== cellValue) {
+    if (e.oldValue !== cellValue && cellValue !== "") {
       if (address[0] === "H" || address[0] === "I" || address[0] === "J" || address[0] === "K" || address[0] === "R") {
-        cell.setValue(cellValue.replace(/(?:(?<=\s)\s+)|(?:(?<=^)\s(?!,|\s*$))|(?:(?<!^|[,\s])\s+(?=,|$))/g,"").replace(/(^,)|((?<=,)\S)/g," $&"));
+        cell.setValue(cellValue.replace(/(?:(?<=\s)\s+)|(?:(?<=^)\s(?!,|\s*$))|(?:(?<!^|[,\s])\s+(?=,|$))/g,"").replace(/(^,)|((?<=,)\S)|((?<=\S)\({2})/g," $&"));
       }
     }
   }  
