@@ -27,24 +27,24 @@ function onEdit(e) {
     
     if (address === "A3") {
       if (cellValue === "Show Extra Time Zones") {
-        sheet.showColumns(7,2);
-        sheet.showColumns(10);
-        sheet.showColumns(12,3);
+        sheet.showColumns(9,2);
+        sheet.showColumns(13);
+        sheet.showColumns(16,3);
       }
       if (cellValue === "Hide Extra Time Zones") {
-        sheet.hideColumns(7,2);
-        sheet.hideColumns(10);
-        sheet.hideColumns(12,3);
+        sheet.hideColumns(9,2);
+        sheet.hideColumns(13);
+        sheet.hideColumns(16,3);
       }
     }
     
     // Change color of pools background.
     
-    if (address === "P4"){
-      colorRange = sheet.getRange("P4:Q4");
+    if (address === "U6"){
+      colorRange = sheet.getRange("U6:AB6");
       poolTitles = {h:"#ff4d6a",t:"#db8903",w:"#dfc90c"};
       colorRange.setBackground(poolTitles[cellValue.substr(0,1).toLowerCase()]);
-      colorRange = sheet.getRange("P5:Q27");
+      colorRange = sheet.getRange("U7:AB30");
       pools = {h:"#ffbbcf",t:"#ffcd00",w:"#fffd49"};
       colorRange.setBackground(pools[cellValue.substr(0,1).toLowerCase()]);
     }
@@ -81,8 +81,8 @@ function dstCheck () {
   
   spreadsheet = SpreadsheetApp.openById("1VdHbQb6uJdDPLLR5jtemBfmyVJBotbFXmfZocgVdoK8");
   sheet = spreadsheet.getSheetByName("Schedule");
-  acell = sheet.getRange(3,6);
-  ecell = sheet.getRange(3,15);
+  acell = sheet.getRange(3,5);
+  ecell = sheet.getRange(3,9);
   acellValue = acell.getValue();
   ecellValue = ecell.getValue();
   ad.setDate(ad.getDate() - 7);
@@ -91,17 +91,17 @@ function dstCheck () {
   // Daylight Saving Time Checks.
   
   if (d.getDay() === 0) {
-    if ((ad.getMonth() > 1 && d.getMonth() < 10) && acellValue === "Off") {
-      acell.setValue("On");
+    if ((ad.getMonth() > 1 && ad.getMonth() !== 11 && d.getMonth() < 10) && acellValue === "OFF") {
+      acell.setValue("ON");
     }
     if ((ad.getMonth() < 2 || d.getMonth() > 9) && acellValue === "On") {
-      acell.setValue("Off");
+      acell.setValue("OFF");
     }
     if ((ed.getMonth() > 2 && ed.getMonth() < 10) && ecellValue === "Off") {
-      ecell.setValue("On");
+      ecell.setValue("ON");
     }
     if ((ed.getMonth() < 3 || ed.getMonth() > 9) && ecellValue === "On") {
-      ecell.setValue("Off");
+      ecell.setValue("OFF");
     }
   }
 }
