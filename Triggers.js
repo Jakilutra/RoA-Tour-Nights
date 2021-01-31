@@ -40,11 +40,22 @@ function onEdit(e) {
     
     // Change color of pools background.
     
-    if (address === "U6"){
+    if (address === "U6") {
       colorRange = sheet.getRange("U6:AB6");
       poolTitles = {h:"#ff4d6a",t:"#db8903",w:"#dfc90c"};
       colorRange.setBackground(poolTitles[cellValue.substr(0,1).toLowerCase()]);
-      colorRange = sheet.getRange("U7:AB30");
+      colorRange = sheet.getRange("U7:AB32");
+      pools = {h:"#ffbbcf",t:"#ffcd00",w:"#fffd49"};
+      colorRange.setBackground(pools[cellValue.substr(0,1).toLowerCase()]);
+    }
+
+    // Change 10x+ times background.
+
+    if (address === "AE2") {
+      colorRange = sheet.getRange("AE2:AF2");
+      poolTitles = {h:"#ff4d6a",t:"#db8903",w:"#dfc90c"};
+      colorRange.setBackground(poolTitles[cellValue.substr(0,1).toLowerCase()]);
+      colorRange = sheet.getRange("AE7:AF32");
       pools = {h:"#ffbbcf",t:"#ffcd00",w:"#fffd49"};
       colorRange.setBackground(pools[cellValue.substr(0,1).toLowerCase()]);
     }
