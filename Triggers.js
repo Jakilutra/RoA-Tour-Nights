@@ -92,8 +92,8 @@ function dstCheck () {
   
   spreadsheet = SpreadsheetApp.openById("1VdHbQb6uJdDPLLR5jtemBfmyVJBotbFXmfZocgVdoK8");
   sheet = spreadsheet.getSheetByName("Schedule");
-  acell = sheet.getRange(3,5);
-  ecell = sheet.getRange(3,9);
+  acell = sheet.getRange(3,6);
+  ecell = sheet.getRange(3,8);
   acellValue = acell.getValue();
   ecellValue = ecell.getValue();
   ad.setDate(ad.getDate() - 7);
