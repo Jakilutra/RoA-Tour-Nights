@@ -105,13 +105,13 @@ function dstCheck () {
     if ((ad.getMonth() > 1 && ad.getMonth() !== 11 && d.getMonth() < 10) && acellValue === "OFF") {
       acell.setValue("ON");
     }
-    if ((ad.getMonth() < 2 || d.getMonth() > 9) && acellValue === "On") {
+    if ((ad.getMonth() < 2 || d.getMonth() > 9) && acellValue === "ON") {
       acell.setValue("OFF");
     }
-    if ((ed.getMonth() > 2 && ed.getMonth() < 10) && ecellValue === "Off") {
+    if ((ed.getMonth() > 2 && ed.getMonth() < 10) && ecellValue === "OFF") {
       ecell.setValue("ON");
     }
-    if ((ed.getMonth() < 3 || ed.getMonth() > 9) && ecellValue === "On") {
+    if ((ed.getMonth() < 3 || ed.getMonth() > 9) && ecellValue === "ON") {
       ecell.setValue("OFF");
     }
   }
