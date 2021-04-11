@@ -18,7 +18,6 @@ function InsertChronology() {
       throw new Error("You are on the " + sheetName + " Sheet! Go to the Chronology Sheet to use this macro!");
   }
   
-  
   // Declaring and assigning another variable: lastRow = Last Filled Row #.
   
   var lastRow = 0;
